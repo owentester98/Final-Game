@@ -43,6 +43,7 @@ int randNumy = 0;
     long desiredTime = (1000)/desiredFPS;
     Rectangle player = new Rectangle (500, 1100, 50 ,50);
     int playerSpeed = 10;
+    int playerScore = 0;
     
     BufferedImage mazePic = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     
@@ -77,6 +78,8 @@ int randNumy = 0;
              int[] ySpotsLeftside = {Numy[i-1] - camy, Numy[i-1] - camy,Numy[i] - camy, Numy[i] - camy};
              gPic.fillPolygon(xSpotsLeftside, ySpotsLeftside, 4);
          }
+         gPic.setColor(Color.BLACK);
+          gPic.drawString("Player 1: " + playerScore, 60, 60); 
           gPic.setColor(Color.RED);
 //         //for(int i = 1; i < Numx.length; i++)
 //         {
@@ -89,7 +92,7 @@ int randNumy = 0;
         
         //show the maze
         g.drawImage(mazePic, 0, 0, this);
-        
+       
         
         //draw player
        
@@ -120,9 +123,11 @@ int randNumy = 0;
             
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-           // if(mazePic.getRGB(110, 300) == Color.red.getRGB())
+           // if(mazePic.getRGB(player.x, player.y) == Color.red.getRGB())
             //{
-                //System.out.println("hit");
+              // System.out.println("hit");
+               
+               
             //}
     //When player's y position gains another 200
             //Randomly set new x and y coordinates for walls
@@ -135,7 +140,7 @@ int randNumy = 0;
    // player moving right
             if(right)
             {
-                player.x += playerSpeed;
+                player.x += playerSpeed ;
                 //player moving left
             }else if(left)
             {
@@ -143,7 +148,8 @@ int randNumy = 0;
             }
   
             //player always moving up
-            player.y--;  
+            player.y-= 10;  
+            playerScore+= 1;
 //            //camera follows player
            camy = player.y - HEIGHT + 150;
 
@@ -239,10 +245,10 @@ int randNumy = 0;
 
          for(int i = 0; i < Numx.length; i++)
          {
-            randNumx = (int)(Math.random()*((600 - 70) - 1 + 1))+ 1;
+            randNumx = (int)(Math.random()*((500 - 70) - 1 + 1))+ 1;
 
             Numx[i] = randNumx;
-            Numy[i] = player.y - 100 - i*100;
+            Numy[i] = player.y - 100 - i*250;
          }
 
     }
