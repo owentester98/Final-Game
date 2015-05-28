@@ -25,8 +25,9 @@ import java.awt.image.BufferedImage;
 // make sure you rename this class if you are doing a copy/paste
 public class FinalProject extends JComponent implements KeyListener{
 
-    int[] Numx = new int[100];
-    int[] Numy = new int[100];
+    int[] Numx = new int[10000];
+    int[] Numy = new int[10000];
+    int[] Numx2 = new int[10000];
 
     // Height and Width of our game
     static final int WIDTH =1000;
@@ -75,9 +76,12 @@ int randNumy = 0;
          for(int i = 1; i < Numx.length; i++)
          {
              int[] xSpotsLeftside = {0, Numx[i-1], Numx[i], 0 };
+             int[] xSpotsRightside = {WIDTH, Numx[i-1] + 400, Numx[i] + 400, WIDTH };
              int[] ySpotsLeftside = {Numy[i-1] - camy, Numy[i-1] - camy,Numy[i] - camy, Numy[i] - camy};
              gPic.fillPolygon(xSpotsLeftside, ySpotsLeftside, 4);
+             gPic.fillPolygon(xSpotsRightside, ySpotsLeftside, 4);
          }
+         
          gPic.setColor(Color.BLACK);
           gPic.drawString("Player 1: " + playerScore, 60, 60); 
           gPic.setColor(Color.RED);
@@ -152,6 +156,14 @@ int randNumy = 0;
             playerScore+= 1;
 //            //camera follows player
            camy = player.y - HEIGHT + 150;
+          
+           
+//           if (player.x  == xSpotsLeftside)
+//                   {
+//                       System.out.println("HIT");
+//                       playerScore = 0;
+//                       
+//                   }
 
             // GAME LOGIC ENDS HERE 
             
@@ -245,10 +257,10 @@ int randNumy = 0;
 
          for(int i = 0; i < Numx.length; i++)
          {
-            randNumx = (int)(Math.random()*((500 - 70) - 1 + 1))+ 1;
+            randNumx = (int)(Math.random()*((750 - 70) - 1 + 1))+ 1;
 
             Numx[i] = randNumx;
-            Numy[i] = player.y - 100 - i*250;
+            Numy[i] = player.y - 100 - i*500;
          }
 
     }
